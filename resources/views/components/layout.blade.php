@@ -24,11 +24,7 @@
 </head>
 
 <body>
-    <nav>
-        <a href="{{ route('products.index') }}">
-            Produits
-        </a>
-    </nav>
+    <x-navbar />
     <hr>
     <main>
         {{ $slot }}

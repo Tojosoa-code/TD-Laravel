@@ -7,35 +7,49 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name("welcome");
 
 Route::get(
     '/course',
     [CourseController::class, 'index']
-);
+)->name("course");
 
 Route::get(
     '/about',
     [CourseController::class, 'about']
-);
-
-Route::get(
-    '/products',
-    [ProductController::class, 'index']
-)->name('products.index');
-
-Route::get(
-    '/products/{id}',
-    [ProductController::class, 'show']
-)
-->whereNumber('id')
-->name('products.show');
+)->name("about");
 
 
-Route::get('/search', function (Request $request) {
-    $query = $request->query('q', '');
-    return "Recherche : $query";
+
+Route::get('/contact', function () {
+    return view('contact');
+})->name("contact");
+
+Route::post('/contact', function (Request $request) {
+    return 'Formulaire reçu par POST';
 });
+
+Route::prefix('products')
+    ->name('products.')
+    ->group(function () {
+        Route::get(
+            '/',
+            [ProductController::class, 'index']
+        )->name('index');
+
+        Route::get(
+            '/{id}',
+            [ProductController::class, 'show']
+        )
+        ->whereNumber('id')
+        ->name('show');
+    });
+
+
+
+
+
+Route::get('/search', [ProductController::class, 'search'])->name("search");
 
 
 Route::get('/debug/request', function (Request $request) {
@@ -47,13 +61,9 @@ Route::get('/debug/request', function (Request $request) {
     ]);
 });
 
-Route::get('/contact', function () {
-    return view('contact');
-});
 
-Route::post('/contact', function (Request $request) {
-    return 'Formulaire reçu par POST';
-});
+
+
 
 
 Route::get('/test-uri', function () {

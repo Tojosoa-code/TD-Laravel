@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="fr">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Contact</title>
-</head>
-
-<body>
+<x-layout title="Contact">
     <h1>Contact</h1>
     <form method="POST" action="/contact">
         @csrf
@@ -14,6 +6,4 @@
         <input type="text" name="name">
         <button type="submit">Envoyer</button>
     </form>
-</body>
-
-</html>
+</x-layout>

@@ -28,4 +28,18 @@ class ProductController extends Controller
         ]);
     }
 
+    public function search(Request $request): View
+    {
+        $query = $request->query('q', '');
+
+        $products = Product::where('name', 'like', "%$query%")
+            ->orderBy('name')
+            ->get();
+
+        return view('products.search', [
+            'products' => $products,
+            'query' => $query,
+        ]);
+    }
+
 }
