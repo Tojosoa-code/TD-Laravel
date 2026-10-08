@@ -1,0 +1,14 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <title>{{ $title }}</title>
+    </head>
+<body>
+    <h1>{{ $title }}</h1>
+    <p>About</p>
+    <a href="/course">Accueil</a>
+</body>
+</html>
+
