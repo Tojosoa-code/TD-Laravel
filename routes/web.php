@@ -29,25 +29,10 @@ Route::post('/contact', function (Request $request) {
     return 'Formulaire reçu par POST';
 });
 
-Route::prefix('products')
-    ->name('products.')
-    ->group(function () {
-        Route::get(
-            '/',
-            [ProductController::class, 'index']
-        )->name('index');
-
-        Route::get(
-            '/{id}',
-            [ProductController::class, 'show']
-        )
-        ->whereNumber('id')
-        ->name('show');
-    });
-
-
-
-
+Route::resource(
+    'products',
+    ProductController::class
+)->whereNumber('product');;
 
 Route::get('/search', [ProductController::class, 'search'])->name("search");
 
@@ -62,15 +47,8 @@ Route::get('/debug/request', function (Request $request) {
 });
 
 
-
-
-
-
 Route::get('/test-uri', function () {
-    return route(
-        'products.show',
-        ['id' => 5]
-    );
+    return route('products.show', ['product' => 5]);
 });
 
 Route::prefix('admin')
